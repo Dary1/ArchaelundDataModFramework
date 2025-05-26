@@ -9,14 +9,8 @@ An unofficial modding framework for [Archaelund](https://store.steampowered.com/
 ## ✨ Features
 
 - **Runtime Data Modification**: Modify game data files during runtime without touching original files
-- **BepInEx Integration**: Built on the stable and widely-used BepInEx modding framework
 - **Non-Destructive**: Keeps original game files intact while applying modifications
 - **Developer-Friendly**: Easy-to-use API for creating data modification mods
-- **Extensible**: Plugin architecture allows for custom data processors and handlers
-
-## 🎮 About Archaelund
-
-Archaelund is a classic RPG that combines first-person exploration with tactical turn-based combat. It features deep character progression, strategic battles, and an expansive world to explore. This framework allows modders to enhance and customize the game experience by modifying various game data elements.
 
 ## 📋 Requirements
 
@@ -35,8 +29,8 @@ Archaelund is a classic RPG that combines first-person exploration with tactical
    - Run the game once to initialize BepInEx
 
 2. **Install the Framework**:
-   - Download the latest release from the [Releases page](../../releases)
-   - Extract `ArchaelundDataModFramework.dll` to `BepInEx/plugins/ArchaelundDataModFramework`
+   - Download this repository from code -> download zip
+   - Place ArchaelundDataModFramework under `BepInEx/plugins`
    - Launch Archaelund to verify installation
 
 3. **Install Data Mods**:
