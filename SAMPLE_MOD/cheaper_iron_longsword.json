@@ -1,0 +1,15 @@
+{
+  "fileReplacements": [
+    {
+      "fileName": "items.txt",
+      "delimiter": "\t",
+      "idColumn": "ID",
+      "replacements": [
+        {
+          "rowIdentifier": "iron_longsword",
+          "columnName": "Price",
+          "newValue": "15",          
+          "comment": "Test: Make iron longsword half price"
+        }
+    }
+}
