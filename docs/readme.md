@@ -36,46 +36,12 @@ Archaelund is a classic RPG that combines first-person exploration with tactical
 
 2. **Install the Framework**:
    - Download the latest release from the [Releases page](../../releases)
-   - Extract `ArchaelundDataModFramework.dll` to `BepInEx/plugins/`
+   - Extract `ArchaelundDataModFramework.dll` to `BepInEx/plugins/ArchaelundDataModFramework`
    - Launch Archaelund to verify installation
 
 3. **Install Data Mods**:
-   - Place compatible data mod files in `BepInEx/plugins/ArchaelundDataMods/`
-   - Configure mods via `BepInEx/config/ArchaelundDataModFramework.cfg`
+   - Place compatible data mod directory in `BepInEx/plugins/ArchaelundDataModFramework/mods`   
 
 ### For Developers (Creating Mods)
 
-1. **Set up Development Environment**:
-   ```bash
-   # Clone the repository
-   git clone https://github.com/Dary1/ArchaelundDataModFramework.git
-   cd ArchaelundDataModFramework
-   
-   # Restore NuGet packages
-   dotnet restore
-   ```
-
-2. **Reference Required Libraries**:
-   - `BepInEx.dll`
-   - `UnityEngine.dll`
-   - `Assembly-CSharp.dll` (from Archaelund)
-   - `ArchaelundDataModFramework.dll`
-
-3. **Create Your First Data Mod**:
-   ```csharp
-   [BepInPlugin("your.namespace.modname", "Your Mod Name", "1.0.0")]
-   public class YourDataMod : BaseUnityPlugin
-   {
-       void Awake()
-       {
-           // Register your data modifications
-           ArchaelundDataModFramework.RegisterDataMod(this);
-       }
-   }
-   ```
-
-## 📚 Documentation
-
-### Core Concepts
-
-**Data Processors**: Handle specific types of game data (items, spells, ch
+[archaelund_game_db_documentation](archaelund_game_db_documentation.md)
