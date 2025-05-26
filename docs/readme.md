@@ -16,8 +16,7 @@ An unofficial modding framework for [Archaelund](https://store.steampowered.com/
 
 - **Archaelund** (Steam Early Access version)
 - **BepInEx 5.4.x** or higher
-- **.NET Framework 4.7.2** or higher
-- **Windows 10/11** (64-bit recommended)
+- **Windows 10+ ** (64-bit recommended)
 
 ## 🚀 Quick Start
 
