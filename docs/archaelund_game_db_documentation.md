@@ -90,6 +90,25 @@ All files use **tab-separated values (TSV)** format with the following character
 **Purpose**: Weapon combat statistics  
 **ID Column**: `ID`
 
+### Columns:
+| Column Name | Type | Sample Values | Description |
+|-------------|------|---------------|-------------|
+| ID | String | `sword_1`, `mace_2`, `bow_3` | Weapon identifier |
+| type | String | `longsword`, `mace`, `bow` | Base weapon type |
+| Material | String | `Steel`, `Iron` | Material type |
+| Accuracy | Integer | `0`, `5`, `10` | Accuracy bonus |
+| Crit | Integer | `0`, `3`, `6` | Critical hit bonus |
+| A.Pierc. | Integer | `0`, `2`, `4` | Armor piercing |
+| Damage | Integer | `0`, `1`, `3` | Damage bonus |
+| DamageType | String | `fire`, `cold`, `shock` | Elemental damage type |
+| 2nd. Damage | String | `2,3,3`, `1,4` | Secondary damage (chance,power,duration) |
+| eff Chance | Integer | `1`, `2`, `3` | Effect chance |
+| eff Power | Integer | `poison`, `stun` | Effect type |
+| Effect | String | `poison`, `stun`, `paralysis` | Status effect |
+| Effect Res | String | `vitality`, `mind`, `spirit` | Resistance type |
+| Res Mod | Integer | `15`, `25` | Resistance modifier |
+| Powers | String | `betrayed` | Special powers |
+
 ### Available Weapon IDs:
 
 #### **Basic Weapons:**
@@ -123,6 +142,25 @@ All files use **tab-separated values (TSV)** format with the following character
 **Purpose**: Base weapon type definitions  
 **ID Column**: `id`
 
+### Columns:
+| Column Name | Type | Sample Values | Description |
+|-------------|------|---------------|-------------|
+| id | String | `longsword`, `bow`, `dagger` | Base weapon type |
+| ranged | Integer | `0`, `8`, `9` | Range in tiles (0 = melee) |
+| APCost | Integer | `3`, `4`, `5` | Action points to use |
+| minDamage | Integer | `1`, `3`, `4` | Minimum damage |
+| maxDamage | Integer | `4`, `7`, `12` | Maximum damage |
+| dmgTrait | String | `STR`, `AWA` | Damage scaling attribute |
+| accuracy | Integer | `0`, `5` | Base accuracy |
+| critical | Integer | `0`, `3`, `8` | Base critical chance |
+| sound | String | `Small`, `Medium`, `Large` | Sound effect |
+| damagetype | String | `Slashing`, `Blunt`, `Piercing` | Physical damage type |
+| skill | String | `Light`, `Hand`, `TwoHanded` | Required skill |
+| piercing | Integer | `0`, `1`, `2` | Armor piercing |
+| style | String | `OneHanded`, `TwoHanded`, `Bow` | Combat style |
+| nameTag | String | `BW_LONGSWORD`, `BW_BOW` | Localization tag |
+| requirements | String | `trait#STR,4`, `trait#DEX,5` | Stat requirements |
+
 ### Available Base Weapon IDs:
 `claw_fast`, `claw`, `claw_slow`, `slam`, `unarmed`, `mace`, `hammer`, `dagger`, `shortsword`, `longsword`, `battleaxe`, `spear`, `staff`, `greatsword`, `greataxe`, `maul`, `bow`, `bow_long`, `arrow`, `bolt`
 
@@ -132,6 +170,29 @@ All files use **tab-separated values (TSV)** format with the following character
 
 **Purpose**: Character career/class definitions  
 **ID Column**: `id`
+
+### Columns:
+| Column Name | Type | Sample Values | Description |
+|-------------|------|---------------|-------------|
+| id | String | `apprentice`, `bandit`, `knight` | Career identifier |
+| category | String | `sage`, `warrior`, `advanced` | Career category |
+| lightw | Integer | `1`, `3`, `5` | Light weapons skill |
+| handw | Integer | `1`, `3`, `6` | Hand weapons skill |
+| 2hw | Integer | `1`, `4`, `6` | Two-handed weapons skill |
+| unarw | Integer | `1`, `3`, `5` | Unarmed combat skill |
+| rangw | Integer | `1`, `4`, `6` | Ranged weapons skill |
+| crit | Integer | `0`, `1`, `3` | Critical hit skill |
+| dodge | Integer | `0`, `2`, `4` | Dodge skill |
+| armor | String | `1,0,1,0,1,0` | Armor proficiency |
+| default traits | String | `3,4,4,4,5,6,7` | Starting attributes |
+| skillpoints | Integer | `1`, `3`, `4` | Skill points per level |
+| skills | String | `alchemy, meditation` | Starting skills |
+| health | Integer | `1`, `4`, `6` | Health bonus |
+| levels | Integer | `4`, `6`, `8` | Max levels |
+| disciplines | String | `Impetus, Gateway` | Magic disciplines |
+| magic adv | String | `1,1,2,1,1,2` | Magic advancement |
+| req1, req2, req3 | String | `trait#INT,6`, `race#human` | Requirements |
+| hidden | Integer | `0`, `1` | Hidden career flag |
 
 ### Available Career IDs:
 
@@ -151,6 +212,15 @@ All files use **tab-separated values (TSV)** format with the following character
 **Purpose**: Career talent progression  
 **ID Column**: `id`
 
+### Columns:
+| Column Name | Type | Sample Values | Description |
+|-------------|------|---------------|-------------|
+| id | String | `apprentice`, `bandit` | Career identifier |
+| tal1-tal8 | String | `erudite_spellcaster`, `open` | Talent names |
+| lvl_tal1-lvl_tal8 | Integer | `1`, `3`, `5` | Level requirements |
+| trait1, trait2 | String | `INT`, `DEX`, `STR` | Bonus traits |
+| lvl_tr1, lvl_tr2 | Integer | `4`, `6`, `8` | Trait bonus levels |
+
 ### Available Career IDs:
 Same as careers.txt (all career IDs listed above)
 
@@ -160,6 +230,24 @@ Same as careers.txt (all career IDs listed above)
 
 **Purpose**: Talent definitions and effects  
 **ID Column**: `id`
+
+### Columns:
+| Column Name | Type | Sample Values | Description |
+|-------------|------|---------------|-------------|
+| id | String | `erudite_spellcaster`, `rage` | Talent identifier |
+| icon | String | `scroll`, `dodge` | Icon reference |
+| type | String | `P`, `A` | Type (Passive/Active) |
+| cost_AP | Integer | `2`, `4`, `6` | Action point cost |
+| cost_wp | Integer | `1`, `3`, `6` | Willpower cost |
+| dailyuses | Integer | `1`, `3` | Daily use limit |
+| combatuses | Integer | `1` | Combat use limit |
+| req1, req2, req3 | String | `trait#str,4` | Requirements |
+| category | String | `open` | Talent category |
+| target | String | `enemy`, `ally`, `self` | Valid targets |
+| range | Integer | `2`, `7`, `99` | Range in tiles |
+| passive bonus | String | `willpower 5`, `dodge 5` | Passive effects |
+| notes | String | `hunter`, `apprentice` | Additional notes |
+| unimplemented | Integer | `0`, `1` | Implementation status |
 
 ### Available Talent IDs:
 
@@ -181,6 +269,33 @@ Same as careers.txt (all career IDs listed above)
 
 **Purpose**: Magic spell definitions  
 **ID Column**: `id`
+
+### Columns:
+| Column Name | Type | Sample Values | Description |
+|-------------|------|---------------|-------------|
+| id | String | `thunder_arrow`, `firebrand` | Spell identifier |
+| icon | String | `ice_shards`, `barrier` | Icon reference |
+| Discipline | String | `Impetus`, `Gateway`, `Piety` | Magic discipline |
+| Rank | Integer | `1`, `2`, `3` | Spell rank/level |
+| price | Integer | `100`, `250` | Learning cost |
+| ap | Integer | `2`, `4`, `8` | Action point cost |
+| cost_wp | Integer | `3`, `5`, `10` | Willpower cost |
+| type | String | `C`, `E`, `CE` | Cast type |
+| target | String | `enemy`, `ally`, `area2` | Valid targets |
+| range | Integer | `7`, `9`, `t` | Range (t=touch) |
+| resist | String | `vitality`, `mind`, `spirit` | Resistance type |
+| duration | String | `12r`, `30m`, `3r+SP` | Effect duration |
+| delay | Float | `0.7`, `1`, `5.5` | Cast delay |
+| effectTarget | String | `2d6h + SP`, `summon_beast#` | Effect description |
+| excludetargets | String | `not_beasts`, `c` | Target exclusions |
+| FX_caster | String | `aura,blue`, `fire_ring` | Caster visual effect |
+| FX_target_uniq | String | `magic_impact` | Unique target effect |
+| FX_target | String | `aura,magenta` | Target visual effect |
+| FX_projectile | String | `fire_bolt`, `force_bolt` | Projectile effect |
+| tags | String | `hostile,damage`, `friendly,heal` | Spell categories |
+| notes | String | `Special behavior notes` | Additional info |
+| AI data | Integer | `0` | AI usage data |
+| hidden | Integer | `0`, `1` | Hidden spell flag |
 
 ### Available Spell IDs by Discipline:
 
@@ -218,6 +333,20 @@ Same as careers.txt (all career IDs listed above)
 **Purpose**: Item usage actions and conditions  
 **ID Column**: `ID`
 
+### Columns:
+| Column Name | Type | Sample Values | Description |
+|-------------|------|---------------|-------------|
+| ID | String | `potion_heal`, `torch` | Item identifier |
+| take_conditions | String | `NoStep#lament_deep,95` | Conditions to take item |
+| take_actions | String | `AddStep#lament_deep,95` | Actions when taken |
+| daily_uses | Integer | `1`, `2` | Daily use limit |
+| charges | Integer | `10`, `20` | Item charges |
+| use_conditions | String | `VarLower#mushroom_hunting,210` | Conditions to use |
+| use_actions | String | `heal#18`, `cast#slumber` | Actions when used |
+| read | String | `scroll7;stain1;c08_letter` | Reading content |
+| usability | String | `C`, `CE`, `E` | Usage context |
+| use_sound | String | `horn`, `General` | Sound when used |
+
 ### Available Item Action IDs:
 `yaksa_draught`, `potion_deep_breath`, `potion_greyward`, `potion_heal`, `potion_heal_2`, `potion_antidote`, `potion_antidote_2`, `herb_ulmsille`, `herb_dylloris`, `herb_vidanna`, `herb_aurum`, `herb_boravis`, `herb_flammata`, `potion_resist_fire`, `potion_resist_cold`, `potion_resist_shock`, `potion_resist_toxic`, `potion_resist_vitality`, `potion_resist_death`, `potion_dark_essence`, `potion_resist_mind`, `potion_might`, `potion_speed`, `potion_might_2`, `potion_speed_2`, `potion_remove_curse`, `potion_cure_disease`, `potion_cure_insanity`, `potion_lesser_remedy`, `tome_ancient_wisdom`, `charm_purification`, `horn_lament`, `torch`, `torch_lit`, `blessed_loaf`, `geldryn_wp_pot`, `restraining_order`, `court_dismissal`
 
@@ -227,6 +356,17 @@ Same as careers.txt (all career IDs listed above)
 
 **Purpose**: Armor and protection statistics  
 **ID Column**: First column (no header name)
+
+### Columns:
+| Column Position | Type | Sample Values | Description |
+|----------------|------|---------------|-------------|
+| 1 | String | `armor_padded_1`, `shield_0` | Armor identifier |
+| 2 (Armor) | Integer | `0`, `5`, `9` | Armor rating |
+| 3 (Crit Def) | Integer | `0`, `3`, `8` | Critical defense |
+| 4 (Penalty) | Integer | `1`, `5`, `10` | Movement penalty |
+| 5 (Deflect) | Integer | `0`, `8`, `16` | Deflection rating |
+| 6 (Powers) | String | `prot_fire 1` | Special powers |
+| 7 (Category) | String | `light`, `heavy` | Armor category |
 
 ### Available Armor IDs:
 
@@ -254,6 +394,40 @@ Same as careers.txt (all career IDs listed above)
 
 **Purpose**: Monster and NPC definitions  
 **ID Column**: `ID`
+
+### Columns:
+| Column Name | Type | Sample Values | Description |
+|-------------|------|---------------|-------------|
+| ID | String | `Norrax`, `Skeleton`, `BanditM` | Creature identifier |
+| portrait | String | `norrax`, `skeleton` | Portrait image |
+| prefab | String | `Norrax`, `Humanoid` | 3D model prefab |
+| width | Float | `1`, `1.6`, `4.9` | Creature width |
+| height | Float | `1`, `1.6`, `4.9` | Creature height |
+| outfit | String | `banditNH`, `barbarian5` | Outfit/clothing |
+| UMA_dna | String | `skeleton`, `thug` | UMA DNA reference |
+| Level | Integer | `1`, `5`, `10` | Creature level |
+| Career | String | `NPC_weak`, `bandit` | Career/class |
+| Gender | String | `M`, `F` | Gender |
+| Race | String | `Human`, `Other`, `Skeleton` | Race |
+| Speed | String | `0.75,0.8`, `1.1,1.6` | Movement speed |
+| Traits SDEAPIF | String | `3,4,2,4,1,1,1` | Attribute array |
+| AP | Integer | `7`, `9`, `11` | Action points |
+| Armor | Integer | `0`, `3`, `9` | Armor rating |
+| CritDef | Integer | `0`, `10`, `30` | Critical defense |
+| Avoid | Integer | `0`, `5`, `20` | Avoidance rating |
+| Weapon 1 | String | `bite_small`, `sword_1` | Primary weapon |
+| Style1 | String | `Unarmed`, `SwordAndShield` | Combat style |
+| mhand,o-hand | String | `rusty_longsword,off_shield_cracked` | Equipment |
+| sounds | String | `skeleton`, `ghost` | Sound set |
+| talents | String | `pack_leader`, `rage` | Special talents |
+| resist VSM | String | `0,0,50`, `20,30,60` | Resistances |
+| protection FCST | String | `3,3,-2,3`, `6,6,-6,6` | Protections |
+| spells | String | `thunder_arrow`, `heal` | Known spells |
+| Faction | String | `Monsters`, `Party` | Faction alignment |
+| Loot | String | `norrax`, `bandit_2` | Loot table |
+| Type | String | `beast`, `undead`, `human` | Creature type |
+| Myth | String | `norrax`, `skeleton` | Mythology reference |
+| XP | Integer | `20`, `100`, `500` | Experience reward |
 
 ### Available Creature IDs:
 
@@ -311,7 +485,8 @@ Same as careers.txt (all career IDs listed above)
   "replacements": [{
     "rowIdentifier": "iron_longsword",
     "columnName": "Price",
-    "newValue": "15"
+    "newValue": "15",
+    "comment": "Make iron longsword cheaper"
   }]
 }
 ```
@@ -324,7 +499,9 @@ Same as careers.txt (all career IDs listed above)
   "replacements": [{
     "rowIdentifier": "dagger_2",
     "columnName": "Crit",
-    "newValue": "8"
+    "newValue": "8",
+    "oldValue": "3",
+    "comment": "Buff steel dagger critical chance"
   }]
 }
 ```
@@ -337,7 +514,9 @@ Same as careers.txt (all career IDs listed above)
   "replacements": [{
     "rowIdentifier": "witch",
     "columnName": "hidden",
-    "newValue": ""
+    "newValue": "0",
+    "oldValue": "1",
+    "comment": "Unlock witch career"
   }]
 }
 ```
@@ -350,7 +529,39 @@ Same as careers.txt (all career IDs listed above)
   "replacements": [{
     "rowIdentifier": "Norrax",
     "columnName": "XP",
-    "newValue": "25"
+    "newValue": "25",
+    "oldValue": "20",
+    "comment": "Increase Norrax experience reward"
+  }]
+}
+```
+
+### Example 5: Make Apprentice Career Start with More Health
+```json
+{
+  "fileName": "careers.txt",
+  "idColumn": "id",
+  "replacements": [{
+    "rowIdentifier": "apprentice", 
+    "columnName": "health",
+    "newValue": "3",
+    "oldValue": "1",
+    "comment": "Give apprentice more starting health"
+  }]
+}
+```
+
+### Example 6: Reduce Healing Potion Price
+```json
+{
+  "fileName": "items.txt",
+  "idColumn": "ID",
+  "replacements": [{
+    "rowIdentifier": "potion_heal",
+    "columnName": "Price", 
+    "newValue": "80",
+    "oldValue": "120",
+    "comment": "Make healing potions cheaper"
   }]
 }
 ```
@@ -360,6 +571,10 @@ Same as careers.txt (all career IDs listed above)
 ## Notes
 
 - **Case Insensitive**: All column names and IDs are matched case-insensitively
-- **Hidden Items**: Items marked *(hidden)* require special unlocking
+- **Hidden Items**: Items marked *(hidden)* require special unlocking or may be NPC-only
 - **References**: Some items reference others (Weapon ID → weapons.txt, Armor ID → armor.txt)
 - **Special Values**: Empty strings `""`, `-1` prices, and `0` values have special meanings
+- **Optional Validation**: Set `oldValue` to validate current values before replacement
+- **Comments**: Use `//` for file comments, `*` for section headers
+- **Multiple Files**: You can modify multiple files in a single config
+- **Backup**: Plugin can create backups of original files (configurable)
