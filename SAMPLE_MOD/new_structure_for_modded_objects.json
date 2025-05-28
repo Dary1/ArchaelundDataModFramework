@@ -1,0 +1,70 @@
+{
+    "fileReplacements": [
+        {
+            "fileName": "items_actions.txt",
+            "delimiter": "\t",
+            "idColumn": "ID",
+            "replacements": [
+                {
+                    "rowIdentifier": "herb_flammata",
+                    "replaceColumns": {
+                        "use_actions": "cast#peace_mind"
+                    }
+                }
+            ]
+        },
+        {
+            "fileName": "spells.txt",
+            "idColumn": "id",
+            "replacements": [
+                {
+                    "rowIdentifier": "thunder_arrow",
+                    "replaceColumns": {
+                        "cost_wp": "2",
+                        "ap": "5"
+                    }
+                },
+                {
+                    "rowIdentifier": "nivaria_hand",
+                    "replaceColumns": {
+                        "cost_wp": "2",
+                        "ap": "1"
+                    }
+                },
+                {
+                    "rowIdentifier": "nivaria_word",
+                    "replaceColumns": {
+                        "cost_wp": "5",
+                        "ap": "5"
+                    }
+                },
+                {
+                    "rowIdentifier": "ethereal_lantern",
+                    "replaceColumns": {
+                        "cost_wp": "0"
+                    }
+                },
+                {
+                    "rowIdentifier": "holy_sustenance",
+                    "replaceColumns": {
+                        "cost_wp": "0"
+                    }
+                }
+            ]
+        },
+        {
+            "fileName": "weapons.txt",
+            "delimiter": "\t",
+            "idColumn": "ID",
+            "replacements": [
+                {
+                    "rowIdentifier": "blightstone",
+                    "replaceColumns": {
+                        "Accuracy": "10",
+                        "type": "dagger"
+                    }
+                }
+            ]
+        }
+    ]
+}
