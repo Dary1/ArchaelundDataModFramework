@@ -59,6 +59,13 @@ namespace ArchaelundDataModFramework
             }
         }
 
+        // Helper function to process strings at line 321
+        public static bool IsNullOrWhiteSpace(string value)
+        {
+            return string.IsNullOrEmpty(value) || value.Trim().Length == 0;
+        }
+
+
         private void LoadAllMods()
         {
             // Only load from mods/ directory - much cleaner!
@@ -311,7 +318,7 @@ namespace ArchaelundDataModFramework
                 for (int i = 0; i < lines.Length; i++)
                 {
                     // Skip comment lines and section headers
-                    if (lines[i].Trim().StartsWith("//") || lines[i].Trim().StartsWith("*") || string.IsNullOrWhiteSpace(lines[i]))
+                    if (lines[i].Trim().StartsWith("//") || lines[i].Trim().StartsWith("*") || IsNullOrWhiteSpace(lines[i]))
                         continue;
 
                     headers = lines[i].Split(new[] { fileConfig.delimiter }, StringSplitOptions.None);
@@ -359,45 +366,46 @@ namespace ArchaelundDataModFramework
                     if (columns.Length <= idColumnIndex) continue;
 
                     string rowId = columns[idColumnIndex].Trim();
-                    var replacement = fileConfig.replacements.FirstOrDefault(r =>
+                   // Gets all the matching replacements for the current row
+                    var matchingReplacements = fileConfig.replacements.Where(r =>
                         string.Equals(r.rowIdentifier, rowId, StringComparison.OrdinalIgnoreCase));
 
-                    if (replacement != null)
+                    foreach (var replacement in matchingReplacements)
                     {
-                        int targetColumnIndex = Array.FindIndex(headers, h =>
-                            string.Equals(h.Trim(), replacement.columnName, StringComparison.OrdinalIgnoreCase));
-
-                        if (targetColumnIndex >= 0 && targetColumnIndex < columns.Length)
+                        // Check if the dictionary with replacements is provided
+                        if (replacement.replaceColumns != null && replacement.replaceColumns.Count > 0)
                         {
-                            string oldValue = columns[targetColumnIndex].Trim();
-
-                            // Validate old value if specified (skip validation if oldValue is empty/null)
-                            if (ValidateOldValues.Value &&
-                                !string.IsNullOrEmpty(replacement.oldValue) &&
-                                !string.Equals(oldValue, replacement.oldValue, StringComparison.OrdinalIgnoreCase))
+                            // Iterate over each key-value pair
+                            foreach (var kvp in replacement.replaceColumns)
                             {
-                                Logger.LogWarning($"Old value mismatch in {fileName}, row {rowId}, column {replacement.columnName}. Expected: '{replacement.oldValue}', Found: '{oldValue}'");
-                                continue;
-                            }
+                                // Find the index of the target column by key
+                                int targetColumnIndex = Array.FindIndex(headers, h =>
+                                    string.Equals(h.Trim(), kvp.Key, StringComparison.OrdinalIgnoreCase));
 
-                            // Handle empty string replacements explicitly
-                            string newValue = replacement.newValue ?? "";
-                            columns[targetColumnIndex] = newValue;
-                            lines[i] = string.Join(fileConfig.delimiter, columns);
-                            anyChanges = true;
-
-                            if (EnableDebugLogging.Value)
-                            {
-                                string oldValueDisplay = string.IsNullOrEmpty(oldValue) ? "(empty)" : $"'{oldValue}'";
-                                string newValueDisplay = string.IsNullOrEmpty(newValue) ? "(empty)" : $"'{newValue}'";
-                                Logger.LogInfo($"Replaced {fileName}[{rowId}].{replacement.columnName}: {oldValueDisplay} -> {newValueDisplay}");
+                                if (targetColumnIndex >= 0 && targetColumnIndex < columns.Length)
+                                {
+                                    string oldValue = columns[targetColumnIndex].Trim();
+                                    // Replace the default value with the new value from the dictionary
+                                    columns[targetColumnIndex] = kvp.Value ?? "";
+                                    anyChanges = true;
+                                    if (EnableDebugLogging.Value)
+                                    {
+                                        Logger.LogInfo($"Replaced {fileName}[{rowId}].{kvp.Key}: " +
+                                                    $"'{oldValue}' -> '{kvp.Value}'");
+                                    }
+                                }
+                                else
+                                {
+                                    Logger.LogWarning($"Column '{kvp.Key}' not found in {fileName}");
+                                }
                             }
-                        }
-                        else
-                        {
-                            Logger.LogWarning($"Column '{replacement.columnName}' not found in {fileName}");
                         }
                     }
+
+                    // After processing all replacements for this row, update the line:
+                    lines[i] = string.Join(fileConfig.delimiter, columns);
+
+
                 }
 
                 // Only return modified content if we actually made changes
@@ -452,15 +460,20 @@ namespace ArchaelundDataModFramework
         public List<Replacement> replacements { get; set; } = new List<Replacement>();
     }
 
+
     [Serializable]
     public class Replacement
     {
         public string rowIdentifier { get; set; }
+        public Dictionary<string, string> replaceColumns { get; set; }
+        
+        // Optional legacy/fallback properties:
         public string columnName { get; set; }
         public string newValue { get; set; }
         public string oldValue { get; set; }
         public string comment { get; set; }
     }
+
 
     [Serializable]
     public class GlobalSettings
